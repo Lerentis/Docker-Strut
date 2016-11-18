@@ -16,6 +16,8 @@ git clone git@github.com:Lerentis/Docker-Strut.git
 cd Docker-Strut && ./buildAndRun.sh
 ```
 
+After that you can find you Strut instance in your Webbrowser at localhost
+
 ## Requirement
 - [docker](https://www.docker.com/)
 
