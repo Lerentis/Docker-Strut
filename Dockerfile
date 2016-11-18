@@ -1,0 +1,17 @@
+FROM ubuntu
+
+MAINTAINER Tobias Trabelsi <Tobias.Trabelsi@HS-Bochum.de>
+
+USER root
+RUN apt-get update && apt-get install nodejs npm git -y
+RUN git clone git://github.com/tantaman/Strut.git
+WORKDIR ./Strut
+RUN ln -s `which nodejs` /usr/bin/node
+
+RUN sed -i.bak '/"grunt-mocha": "~0.2.2",/d' /Strut/package.json
+
+RUN npm install -g grunt-cli  && npm install phantomjs-prebuilt && npm install grunt-mocha --save-dev && npm install
+
+EXPOSE 9000
+
+CMD ["grunt", "server"]
