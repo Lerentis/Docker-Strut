@@ -1,6 +1,6 @@
 # Docker-Strut
 
-A [Strut](https://github.com/tantaman/Strut) Docker Container based on Ubuntu
+A [Strut](https://github.com/tantaman/Strut) Docker Container
 
 ## Usage
 ```bash

@@ -1,17 +1,9 @@
-FROM ubuntu
+FROM node:7-alpine
 
-MAINTAINER Tobias Trabelsi <Tobias.Trabelsi@HS-Bochum.de>
-
-USER root
-RUN apt-get update && apt-get install nodejs npm git -y
-RUN git clone git://github.com/tantaman/Strut.git
+RUN apk add -U libpng-dev libpng zlib zlib-dev build-base file nasm autoconf libjpeg-turbo-utils gcc make git; npm install -g grunt-cli; git clone git://github.com/tantaman/Strut.git
 WORKDIR ./Strut
-RUN ln -s `which nodejs` /usr/bin/node
-
-RUN sed -i.bak '/"grunt-mocha": "~0.2.2",/d' /Strut/package.json
-
-RUN npm install -g grunt-cli  && npm install phantomjs-prebuilt && npm install grunt-mocha --save-dev && npm install
+RUN sed -i.bak 's/"grunt-mocha": "~0.2.2",/"grunt-mocha": "~0.3",/' /Strut/package.json; npm install;apk del build-base file nasm autoconf gcc make git && rm -rf /var/cache/apk/*
 
 EXPOSE 9000
 
-CMD ["grunt", "server"]
+CMD ["grunt", "server"]	
